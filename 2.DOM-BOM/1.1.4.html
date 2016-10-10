@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <button onclick="document.write('清空当前页面，并输出东西')">write</button><br>
+        <textarea cols="40" rows="10" id="txt1"></textarea><br>
+        <input type="button" value="运行"  id="btn1">
+        <script>
+            var oBtn=document.querySelector("#btn1");
+            var oTxt=document.querySelector("#txt1");
+            oBtn.addEventListener("click",function(){
+                var  oNewWin=window.open("about:blank");
+                oNewWin.document.write(oTxt.value);
+            },false);
+
+
+
+        </script>
+
+        <button onclick="window.open('http://www.zhihu.com/','_self')">open</button>
+        <button onclick="window.close()">close</button>
+        <!--也可使用oNewWin.close()来关闭指定的window-->
+
+            <script>
+                console.log(window.navigator.userAgent);
+
+//                window.location="http://www.zhihu.com/";
+                //alert
+                //confirm("....")  true/false
+                //prompt("提示文字","默认值")   输入的值或者null
+                console.log(prompt("请输入","默认值"));
+            </script>
+</body>
+</html>
