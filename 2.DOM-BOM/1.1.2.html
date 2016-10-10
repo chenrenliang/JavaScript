@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <ul>
+            <li>111</li>
+            <li id="test">222</li>
+            <li>333</li>
+            <li>444</li>
+        </ul>
+
+            <script>
+                //1.childNodes
+                var oUl=document.querySelector("ul");
+                console.log(oUl.childNodes.length);//Chrome下包括空白节点 9  低版本IE只包含li*4
+//                oUl.childNodes[0].style.background='red';
+
+                //2.nodeType
+                console.log(oUl.childNodes[0].nodeType);//TEXT_NODE 3
+                console.log(oUl.childNodes[1].nodeType);//ELEMENT_NODE 1
+
+                //3.加判断
+                for(var i=0;i<oUl.childNodes.length;i++){
+                    if(oUl.childNodes[i].nodeType==document.ELEMENT_NODE){//1
+                        oUl.childNodes[i].style.background='red';
+                    }
+                }
+
+                //4.children: childNodes的兼容版
+                for(var i=0;i<oUl.children.length;i++){
+                        oUl.children[i].style.background='green';
+                }
+
+            </script>
+
+            <ul>
+                <li class="test">rterwrew<a href="javascript:;">删除</a> </li>
+                <li>撒旦发射点<a href="javascript:;">删除</a> </li>
+                <li>r胜多负少<a href="javascript:;">删除</a> </li>
+                <li class="test">r胜多负少<a href="javascript:;">删除</a> </li>
+                <li>rt巅峰时代w<a href="javascript:;">删除</a> </li>
+            </ul>
+
+            <script>
+
+                var  aA=document.querySelectorAll("a");
+                for(var i=0;i<aA.length;i++){
+                  aA[i].addEventListener("click",function(){
+                      this.parentNode.style.display='none';
+                  },false);
+                }
+
+            </script>
+                    <!--5.未设置时position:absolute的父级为body,设置了则为设置了定位的最近父级-->
+                <div id="div1" style="width:100px;height:100px;background:red;margin:100px;position: relative;">
+                    <div onclick="alert(this.offsetParent.tagName)" style="width:100px;height:100px;background: yellow;position: absolute;left:100px;top:100px;"></div>
+                </div>
+
+                <input type="text" id="txt1">
+            <script>
+                //6.firstChild(IE),firstElementChild(Chrome)
+                var  oTest=document.getElementById("test");
+                var  oFirst=oUl.firstElementChild || oUl.firstChild;
+                    oFirst.style.background='pink';
+                //7.nextSibling,nextElementSibling
+                var oNext=oTest.nextElementSibling || oTest.nextSibling;
+                oNext.style.background='blue';
+
+                    //8.设置属性
+                var  oText=document.querySelector("#txt1");
+//                    oText.value='Holywood';
+//                oText['value']='Nicholas';
+                oText.setAttribute("value","setBy SetAttribute");
+                console.log(oText.getAttribute("value"));
+
+                //9.getByClass
+
+                function getByClass(oParent,sClass){
+                    var aEle=oParent.getElementsByTagName("*");
+                    var aResult=[];
+                    var re=/\bsClass\b/g;
+                    for(var i=0;i<aEle.length;i++){
+                        if(re.test(aEle[i].className)){
+                            aResult.push(aEle[i]);
+                        }
+                    }
+                        return aResult;
+                }
+
+
+
+
+            </script>
+
+</body>
+</html>
