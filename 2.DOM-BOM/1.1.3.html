@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+            <input type="text"><br>
+            <button>前面添加</button>
+            <ul id="ul1">
+                <li>Original</li>
+            </ul>
+            <script>
+                    var  oTxt=document.querySelector("input");
+                    var   oBtn=document.querySelector("button");
+                    var   oUl=document.querySelector("#ul1");
+                    oBtn.addEventListener("click",function(){
+                        var  oLi=document.createElement("li");
+                        oLi.textContent=oTxt.value;
+//                        oLi.innerHTML=oTxt.value;
+                        if(oUl.children){//oUl.children.length //oUl.getElementsByTagName("li").length>0
+                            oUl.insertBefore(oLi,oUl.firstElementChild);
+                        }else{
+                            oUl.appendChild(oLi);
+                        }
+
+                    },false);
+            </script>
+
+
+            <ul id="ul2">
+                <li>sadfsad<a href="javascript:;">删除</a></li>
+                <li>sadfsad<a href="javascript:;">删除</a></li>
+                <li>sadfsad<a href="javascript:;">删除</a></li>
+                <li>sadfsad<a href="javascript:;">删除</a></li>
+                <li>sadfsad<a href="javascript:;">删除</a></li>
+            </ul>
+
+            <script>
+                var  oUl2=document.querySelector("#ul2");
+                var  aA=oUl2.getElementsByTagName("a");
+                for(var i=0;i<aA.length;i++){
+                    aA[i].addEventListener("click",function(){
+                        oUl2.removeChild(this.parentNode);
+                    },false);
+                }
+
+            </script>
+
+
+            <ul id="frag"></ul>
+            <ul id="withFrag"></ul>
+            <script>
+                var oFrag=document.getElementById("frag");
+                //1.未使用文档碎片
+                var  iStart=Date.now();
+                for(var i=0;i<10000;i++){
+                    var  oLi=document.createElement("li");
+                    oFrag.appendChild(oLi);
+                }
+
+                console.log("Takes "+(Date.now()-iStart)+"ms");
+
+                //2.使用文档碎片
+                var  oFrag2=document.getElementById("withFrag");
+                var  oFragment=document.createDocumentFragment();
+                var iNow=Date.now();
+                for(var i=0;i<1000;i++){
+                    var oLi=document.createElement("li");
+                    oFragment.appendChild(oLi);
+                }
+                oFrag2.appendChild(oFragment);
+                console.log("Another takes "+(Date.now()-iNow)+"ms");
+
+            </script>
+</body>
+</html>
