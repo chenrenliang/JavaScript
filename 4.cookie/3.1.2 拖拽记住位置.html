@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{width:100px;height:100px;background: red;position: absolute;}
+    </style>
+</head>
+<body>
+            <div id="div1"></div>
+            <script>
+                var  oDiv=document.getElementById("div1");
+
+                window.onload=function(){
+                    if(getCookie("left")){
+                        oDiv.style.left=getCookie("left")+"px";
+                        oDiv.style.top=getCookie("top")+"px";
+                    }
+                };
+
+                oDiv.onmousedown=function(ev){
+                    var oEvent=ev || window.event;
+                    var  disX=oEvent.clientX-oDiv.offsetLeft;
+                    var  disY=oEvent.clientY-oDiv.offsetTop;
+
+                    document.onmousemove=function(ev){
+                        var oEvent=ev || window.event;
+                        var l=oEvent.clientX-disX;
+                        var t=oEvent.clientY-disY;
+
+                        if(l<0){l=0;}
+                        else if(l>document.documentElement.clientWidth-oDiv.offsetWidth){
+                            l=document.documentElement.clientWidth-oDiv.offsetWidth;
+                        }
+                        if(t<0){t=0;}
+                        else if(t>document.documentElement.clientHeight-oDiv.offsetHeight){
+                            t=document.documentElement.clientHeight-oDiv.offsetHeight;
+                        }
+
+
+
+                        oDiv.style.left=l+"px";
+                        oDiv.style.top=t+"px";
+                    };
+
+                    document.onmouseup=function(){
+                        document.onmousemove=null;
+                        document.onmouseup=null;
+                        setCookie("left",oDiv.offsetLeft,10);
+                        setCookie("top",oDiv.offsetTop,10);
+                    };
+
+                    return false;
+                };
+
+                function  setCookie(name,value,iDay){
+                    var oDate=new Date();
+                    oDate.setDate(oDate.getDate()+iDay);
+                    document.cookie=name+"="+value+"; expires="+oDate;
+                }
+                function getCookie(name){
+                    var arr1=document.cookie.split("; ");
+                    for(var i=0;i<arr1.length;i++){
+                        var arr2=arr1[i].split("=");
+                        if(arr2[0]==name){
+                            return arr2[1];
+                        }
+                    }
+                    return "";
+                }
+
+                function removeCookie(name){
+                    setCookie(name,"1",-1);
+                }
+
+
+
+
+            </script>
+</body>
+</html>

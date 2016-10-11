@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+            <form action="http://www.zhihu.com" method="get">
+                用户名:<input type="text" id="txt1"><br>
+                密   码:<input type="password" id="pass1"><br>
+                <input type="submit" value="记住用户名和密码" id="submit">
+                <a href="javascript:;">清除记录</a>
+            </form>
+
+            <script>
+                var  oTxt=document.getElementById("txt1");
+                var  oPass=document.getElementById("pass1");
+                var oBtn=document.getElementById("submit");
+                var  oA=document.querySelector("a");
+
+                oBtn.addEventListener("click",function(){
+                    setCookie("user",oTxt.value,10);
+                    setCookie("pass",oPass.value,10);
+                },false);
+
+                oA.onclick=function(){
+                  oTxt.value="";
+                    oPass.value="";
+                    removeCookie("user");
+                    removeCookie("pass");
+                };
+
+                window.onload=function(){
+                  if(getCookie("user")){
+                      oTxt.value=getCookie("user");
+                      oPass.value=getCookie("pass");
+                  }
+
+                };
+
+
+                function  setCookie(name,value,iDay){
+                    var oDate=new Date();
+                    oDate.setDate(oDate.getDate()+iDay);
+                    document.cookie=name+"="+value+"; expires="+oDate;
+                }
+                function getCookie(name){
+                    var arr1=document.cookie.split("; ");
+                    for(var i=0;i<arr1.length;i++){
+                        var arr2=arr1[i].split("=");
+                        if(arr2[0]==name){
+                            return arr2[1];
+                        }
+                    }
+                    return "";
+                }
+
+                function removeCookie(name){
+                    setCookie(name,"1",-1);
+                }
+            </script>
+</body>
+</html>
