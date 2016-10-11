@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{width:100px;height:150px;background: #ccc;display: none;}
+
+    </style>
+</head>
+<body>
+            <button>显示</button>
+            <div id="div1"></div>
+            <script>
+                var button=document.querySelector("button");
+                var oDiv=document.querySelector("#div1");
+                button.addEventListener("click",function(ev){//button的click会传到document,因此需要阻止冒泡
+                        oDiv.style.display='block';
+                    var  oEvent=ev || window.event;
+                    oEvent.cancelBubble=true;//IE
+                    oEvent.stopPropagation();
+                },false);
+
+                document.addEventListener("click",function(){
+                        oDiv.style.display='none';
+                },false);
+
+            </script>
+</body>
+</html>

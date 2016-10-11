@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+            <script>
+//                document.onkeydown=function(ev){
+                    document.onkeypress=function(ev){
+                    var oEvent=ev || window.event;
+//                    console.log(oEvent.keyCode);
+//                    console.log(String.fromCharCode(oEvent.keyCode));
+                    console.log(String.fromCharCode(oEvent.charCode));
+                }
+
+            </script>
+</body>
+</html>

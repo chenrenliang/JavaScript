@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{width:100px;height:100px;background: red;position: absolute;left:100px;top:100px;} /*100*/
+
+        #div1{border:3px solid green;}/*100*/
+        #div1{padding:10px;}/*100*/
+        #div1{margin:14px;}/*114*/
+    </style>
+</head>
+<body>
+            <div id="div1" onclick="alert(this.offsetLeft)"></div>
+
+                <div id="div2" style="width:100px;height:100px;background:#ccc;position: absolute;"></div>
+                <script>
+                    var oDiv2=document.querySelector("#div2");
+
+                    document.onkeydown=function(ev){
+                        var oEvent=ev || window.event;
+                        if(oEvent.keyCode==37){oDiv2.style.left=oDiv2.offsetLeft-5+"px";}
+                        else if(oEvent.keyCode==38){oDiv2.style.top=oDiv2.offsetTop-5+"px";}
+                        else if(oEvent.keyCode==39){oDiv2.style.left=oDiv2.offsetLeft+5+"px";}
+                        else if(oEvent.keyCode==40){oDiv2.style.top=oDiv2.offsetTop+5+"px";}
+                    }
+
+
+                </script>
+
+</body>
+</html>
