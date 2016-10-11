@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <form id="form1" action="http://www.zhihu.com">
+            <input type="submit" value="提交">
+        </form>
+        <script>
+            var oForm=document.querySelector("#form1");
+            oForm.onsubmit=function(){
+                return false;
+            };
+
+        </script>
+
+            <input type="text" id="txt1">
+            <script>
+                //return false与event.preventDefault()的区别
+                var oTxt=document.getElementById("txt1");
+                    oTxt.onkeydown=function(ev){
+                        var oEvent=ev || window.event;
+                       if(oEvent.preventDefault){
+                           oEvent.preventDefault();
+                       }else{
+                           return false;
+                       }
+
+                    }
+            </script>
+</body>
+</html>

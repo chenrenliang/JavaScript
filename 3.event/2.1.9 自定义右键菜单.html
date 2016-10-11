@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    html,body,ul{margin:0;padding:0;}
+        li{list-style: none;}
+        #ul1{background:#ccc;width:100px;border:1px solid #000;display: none;position: absolute;}
+        #ul1 li{height:20px;line-height: 20px;text-indent:5px;}
+        #ul1 li:hover{background:#aaa;cursor: pointer;}
+
+    </style>
+</head>
+<body>
+            <ul id="ul1">
+                <li>登陆</li>
+                <li>回到首页</li>
+                <li>注销</li>
+                <li>加入VIP</li>
+            </ul>
+            <script>
+                var oUl=document.getElementById("ul1");
+                oUl.onclick=function(ev){
+                    var oEvent=ev || window.event;
+                    if( oEvent.stopPropagation){
+                        oEvent.stopPropagation();
+                    }else{
+                        oEvent.cancelBubble=true;
+                    }
+
+                };
+
+                document.oncontextmenu=function(ev){
+                    var oEvent=ev || window.event;
+                    oUl.style.display='block';
+                    oUl.style.left=oEvent.clientX+2+"px";
+                    oUl.style.top=oEvent.clientY+2+"px";
+                  if(oEvent.preventDefault){
+                      oEvent.preventDefault();
+                  }else{
+                      return false;
+                  }
+                };
+                document.onclick=function(){
+                    oUl.style.display='none';
+                }
+
+            </script>
+
+            <input type="text" id="txt1">
+            <label for="txt1">只能输入数字的输入框</label>
+            <script>
+                var oTxt=document.getElementById("txt1");
+                oTxt.addEventListener("keydown",function(ev){
+                    var oEvent=ev|| window.event;
+                    if(oEvent.keyCode !=8 &&(oEvent.keyCode<48  || oEvent.keyCode>57)){
+                        if(oEvent.preventDefault){
+                            oEvent.preventDefault();
+                        }else{
+                            return false;
+                        }
+                    }
+
+                },false);
+
+                document.onclick=function(){
+                  alert(document.documentElement.clientWidth || document.body.clientWidth);
+                    //可视区的宽
+                };
+
+            </script>
+</body>
+</html>
