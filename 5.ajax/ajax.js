@@ -1,5 +1,8 @@
 function  ajax(url,fnSucc,fnFailed){
     //1.创建Ajax对象
+    //用一个不存在的变量：出错
+    //用一个不存在的属性：undefined
+
         var  oAjax=null;
         if(window.ActiveXObject){
             oAjax=new ActiveXObject("Microsoft.XMLHTTP");
@@ -11,6 +14,7 @@ function  ajax(url,fnSucc,fnFailed){
         oAjax.open("GET",url,true);
         //3.发送请求
         oAjax.send(null);
+    
 
     //4.接收服务器的返回
         oAjax.onreadystatechange=function(){
