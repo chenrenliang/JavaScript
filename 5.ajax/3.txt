@@ -1,0 +1,7 @@
+﻿a为元素的水平伸缩量，1为原始大小；
+b为纵向扭曲，0为不变；
+c为横向扭曲，0不变；
+d为垂直伸缩量，1为原始大小；
+e为水平偏移量，0是初始位置；
+f为垂直偏移量，0是初始位置
+matrix(scaleX(),skewX(),skewY(),scaleY(),translateX(),translateY()

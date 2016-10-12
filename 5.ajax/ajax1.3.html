@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <script src="ajax.js"></script>
+        <script>
+            ajax("data.txt",function(str){//[1,2,3,4]
+                var  arr=eval(str);
+                console.log(arr);
+                console.log(arr[0]);
+            });
+
+            ajax("data.json",function(str){//json
+//                var  arr=eval(str);
+                var  arr=JSON.parse(str);
+                console.log(arr);//Array[Object,Object]
+                console.log(arr[0].b);//5
+            });
+
+            var str1="54-8*9+4";
+            console.log(eval(str1));
+
+            var str2="[12,2,3]";
+            console.log(eval(str2));//[12,2,3]
+
+            var str3="alert('abc')";
+            eval(str3);
+
+            var str4='function show(){alert("this is a test")}';
+            eval(str4);
+            show();
+
+        </script>
+</body>
+</html>

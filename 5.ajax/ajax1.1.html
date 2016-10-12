@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+            <script src="ajax.js"></script>
+            <script>
+                ajax("test.txt?t="+new Date().getTime(),function(str){
+                   console.log(str);//str->oAjax.responseText  :This is a test
+                },function(str){
+                    console.log(str);//str->failed: oAjax.status  404
+                });
+
+            </script>
+</body>
+</html>
