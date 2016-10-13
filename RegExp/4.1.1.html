@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <ul id="ul1">
+            <li></li>
+            <li class="box"></li>
+            <li></li>
+            <li></li>
+            <li class="boxsize"></li>
+            <li></li>
+            <li class="and box "></li>
+        </ul>
+
+        <script>
+            var str1="abcdef";
+            console.log(str1.search('bc'));//可以search字符串 :第一次出现的位置
+            console.log(str1.search('bg'));//-1
+            console.log(str1.substring(1,4));//[1,4) bcd
+            console.log(str1.substring(1));//[1,到结束]
+            console.log(str1.charAt(2));//第index个的索引的char  c
+            var  str2="182-7077-2314";
+            //String->Array
+            console.log(str2.split("-"));//['182','7077','2314']
+
+            var str3="12,87 76 -ddf e dd 89 ff76 9";
+            var arr=[];
+            var tmp="";
+            for(var i=0;i<str3.length;i++){
+                if(str3.charAt(i)>="0" && str3.charAt(i) <="9"){
+                    tmp+=str3.charAt(i);
+                }else{
+                    if(tmp){
+                        arr.push(tmp);
+                        tmp="";
+                    }
+                }
+            }
+
+            if(tmp){
+                arr.push(tmp);
+                tmp="";
+            }
+            console.log(arr);
+
+            var  re=/\d+/g;
+            console.log(str3.match(re));
+
+            var  str4='abcdefA';
+            var re1=new RegExp("a",'i');
+            var re2=/a/i;
+            console.log(re1.test(str4));//true
+            console.log(re2.test(str4));//true
+            console.log(str4.search(/d/));//3
+
+            var str5=" asdf 443 vczxv 55";
+            var re5=/\d/;
+            console.log(str5.search(re5));//第一次匹配 6
+
+            console.log(window.navigator.userAgent);
+
+            if(window.navigator.userAgent.search(/firefox/i) !=-1){
+                console.log('ff');
+            }else if(window.navigator.userAgent.search(/chrome/i) !=-1){
+                console.log('chrome');
+            }else if(window.navigator.userAgent.search(/MSIE 10/i) !=-1){//版本10
+                console.log('IE10');
+            }else if(window.navigator.userAgent.search(/Trident/i) !=-1){
+                console.log('IE11');
+            }
+
+            var  str6="sdf e443 fedef 55 66gg 3323121312 dff 99";
+            console.log(str6.match(/\d+/g));
+
+            var str7="abacdAef";
+            console.log(str7.replace(/a/ig,'T'));//把所有的a,A替换成T
+
+
+            var  str8='1b2 abc 1c2 ee';
+            var  re8=/1[abc]2/g;//1a2 1b2 1c2
+            console.log(str8.match(re8));//['1b2','1c2']
+
+            //去空格
+            var str9="   fd  rr  erre   fff  ";
+            console.log("("+(str9.replace(/\s+/g,""))+")");//把空格全部替换成空
+
+            //找QQ号
+            var str10='我的QQ是：258344567，你的是4487773吗？';
+            var re10=/[1-9]\d{4,10}/g;
+//            var  re10=/\d{5,11}/g;//0不开头
+            console.log(str10.match(re10));
+
+
+            //去掉首尾空格
+            var str11="    ffe    ww  ee fefw   ";
+            var re11=/^\s+|\s+$/g;
+            console.log("("+str11.replace(re11,"")+")");
+
+            //检测中文
+            var  str12="asdef 34 +_=w4e 让你们明白+sdfsasd";
+            var re12=/[\u4e00-\u9fa5]/;
+            console.log(re12.test(str12));//有中字
+
+            //完美版getByClass
+            function getByClass(oParent,sClass){
+                var aEle=oParent.getElementsByTagName("*");
+                var aResult=[];
+
+                var  re=new RegExp("\\b"+sClass+"\\b","i");
+//                var  re=/\bsClass\b/i;
+
+                for(var i=0;i<aEle.length;i++){
+                    //if(aEle[i].className.search(sClass) !=-1)
+                    if(re.test(aEle[i].className)){
+                        aResult.push(aEle[i]);
+                    }
+                }
+                return aResult;
+            }
+
+            var oUl=document.getElementById("ul1");
+            var  aBox=getByClass(oUl,'box');
+            console.log(aBox);
+            for(var i=0;i<aBox.length;i++){
+                aBox[i].style.background='red';
+            }
+
+
+        </script>
+</body>
+</html>
