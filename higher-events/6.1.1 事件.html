@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+            <input type="button" id="btn1" value="aaa">
+
+            <script>
+                //HTML事件
+                //DOM0级事件:只能添加一个 oBtn.click=a; oBtn.click=b;前者被后者覆盖
+                //DOM2级事件：添加多个    顺序或许不同
+                function myAddEvent(obj,sEv,fn) {
+                    if (obj.attachEvent) {
+                        obj.attachEvent("on" + sEv, fn);
+                    } else {
+                        obj.addEventListener(sEv, fn, false);
+                    }
+                }
+
+                //绑定和this:   IE中this会绑定到window
+                var  oBtn1=document.getElementById("btn1");
+                /*oBtn1.onclick=function(){//低版本IE ：this->window    其他：this->HTMLInputElement
+                    alert(this);
+                };*/
+
+           /*     oBtn1.attachEvent("onclick",function(){//IE
+                    console.log(this);//[object Window]
+                    console.log(this==window);//true
+                });*/
+
+              oBtn1.addEventListener("click",function(){
+                  console.log(this);//oBtn1
+              },false);
+
+                //匿名函数不能解绑
+                //非匿名函数解绑必须传入同样的参数
+                var   a=function(){alert('a');};
+                var   b=function(){alert('b');};
+                console.log(a==b);//false
+
+
+
+
+
+
+            </script>
+</body>
+</html>
