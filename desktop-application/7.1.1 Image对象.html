@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload=function(){
+            //document.createElement('img')一样，返回一个 HTMLImageElement 实例.
+            /*                var  image=new Image(100,200);
+             image.src='picture.jpg';
+             console.log(image.src);*/
+
+            var  oImg=new Image();
+            oImg.onload=function(){//对于下面的oImg.src来说
+                alert("图片预加载完成");
+            };
+
+            oImg.onerror=function(){//对于下面的oImg.src来说
+                alert('图片加载失败');
+            };
+
+            oImg.src='http://pic1.win4000.com/wallpaper/2/57ec7798da967.jpg';
+
+            //寻找最小值
+            var arr=[12,32,1,33,99,44,75,15,465];
+            var  min=arr[0];
+            var  iMin=9999;
+            for(var i=0;i<arr.length;i++){
+                if(arr[i]<min){
+                    min=arr[i];
+                    iMin=i;
+                }
+            }
+            console.log("最小值是:"+min+"索引是:"+iMin);
+
+
+
+        }
+
+    </script>
+</head>
+<body>
+          <img width="400" height="300" src="http://www.duose.com/p/2007/0405/46516_046875.jpg"
+               onmouseover="this.src='http://pic1.win4000.com/wallpaper/2/57ec7798da967.jpg'"  onmouseout="this.src='http://www.duose.com/p/2007/0405/46516_046875.jpg'"/>
+
+            <img src="http://pic1.win4000.com/wallpaper/2/57ec7798da967.jpg" onload="alert('完成')" onerror="alert('失败')"/>
+
+</body>
+</html>
