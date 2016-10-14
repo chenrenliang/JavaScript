@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <form id="form1" action="http://www.zhihu.com/" method="get">
+            用户名:<input type="text" name="user"><br>
+            密 码:<input type="password" name="pass"><br>
+            <input type="submit" value="提交">
+            <input type="reset" value="重置">
+        </form>
+        <script>
+            var oForm=document.getElementById("form1");
+            var oUser=document.getElementsByName("user")[0];
+            var oPass=document.getElementsByName("pass")[0];
+            oForm.onsubmit=function(){
+                if(oPass.value=="" || oUser.value==""){//空
+                    alert('您的输入为空');
+                    return false;
+                }
+            };
+
+            oForm.onreset=function(){//重置
+                return confirm("是否要清空?");
+                //confirm 是 ->true  :return true  不会阻止默认事件
+                //否->false :return false  阻止默认清空
+            }
+
+
+        </script>
+
+</body>
+</html>

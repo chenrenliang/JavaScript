@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+            <input type="text" id="txt1"><input type="button" id="btn1"  value="添加">
+            <table id="tb1" style="border-collapse: collapse;" border="1" width="400">
+                <thead>
+                    <tr><th>ID</th><th>姓名</th><th>操作</th></tr>
+                </thead>
+                <tbody>
+                        <tr><td>1</td><td>Blue</td><td></td></tr>
+                        <tr><td>2</td><td>Leo</td><td></td></tr>
+                        <tr><td>3</td><td>莫莫</td><td></td></tr>
+                        <tr><td>4</td><td>aaa</td><td></td></tr>
+                        <tr><td>5</td><td>bbb</td><td></td></tr>
+                        <tr><td>6</td><td>ccc</td><td></td></tr>
+                </tbody>
+            </table>
+            <script>
+                var oTab=document.getElementById("tb1");
+                console.log(oTab.tBodies[0].rows[2].cells[1].textContent);
+                console.log(oTab.tBodies[0].rows[2].cells[1].innerHTML);
+                console.log(oTab.getElementsByTagName("tbody")[0].getElementsByTagName("tr")[2].
+                getElementsByTagName('td')[1].textContent);
+                //不加tBodies
+                console.log(oTab.rows[0].cells[1].innerHTML);//thead中的tr行
+
+                var  a='aaa';
+                var   A='AAA';
+                console.log(a.toLowerCase()==A.toLowerCase());
+
+                var  str="abcdef";
+                console.log(str.search('u'));//-1 找到就返回index
+                console.log(str.search('a'));//0  找到就返回index
+
+                var  str1="blue leo";
+                var  arr=str1.split(" ");//['blue','leo']
+
+                var  str2='leo is  a person';
+                var  bFound=false;
+                for(var i=0;i<arr.length;i++){
+                    if(str2.search(arr[i]) !=-1){
+                        bFound=true;
+                        break;
+                    }
+                }
+                console.log(bFound);
+
+
+                //隔行变色
+                var  rows=oTab.tBodies[0].rows;
+                function changeColor(){
+                    for(var i=0;i<rows.length;i++){
+                        rows[i].style.background=(i%2)?"#ccc":"";
+                    }
+                }
+
+                changeColor();
+                //移入高亮
+                var  originalColor="";
+                for(var i=0;i<rows.length;i++){
+                    rows[i].onmouseover=function(){
+                        originalColor=this.style.background;
+                        this.style.background='yellow';
+                    };
+                    rows[i].onmouseout=function(){
+                        this.style.background=originalColor;
+                    }
+                }
+
+                var  oTxt=document.getElementById("txt1");
+                var  oBtn=document.getElementById("btn1");
+                var   iNow=0;
+
+                oBtn.onclick=function(){
+                    var  oTr=document.createElement("tr");
+
+                    var  oTd=document.createElement("td");
+                    oTd.innerHTML=oTab.tBodies[0].rows.length++;
+                    oTr.appendChild(oTd);
+
+                    var  oTd=document.createElement("td");
+                    oTd.innerHTML=oTxt.value;
+                    oTr.appendChild(oTd);
+
+                    var  oTd=document.createElement("td");
+                    oTd.innerHTML="&nbsp;";
+                    oTr.appendChild(oTd);
+
+                    oTab.tBodies[0].appendChild(oTr);
+                    changeColor();
+
+                }
+
+
+            </script>
+</body>
+</html>

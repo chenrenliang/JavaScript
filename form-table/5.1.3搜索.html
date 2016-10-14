@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="txt1"><input type="button" id="btn1"  value="搜索">
+<table id="tb1" style="border-collapse: collapse;" border="1" width="400">
+    <thead>
+    <tr><th>ID</th><th>姓名</th><th>操作</th></tr>
+    </thead>
+    <tbody>
+    <tr><td>1</td><td>Blue</td><td></td></tr>
+    <tr><td>2</td><td>Leo</td><td></td></tr>
+    <tr><td>3</td><td>莫莫</td><td></td></tr>
+    <tr><td>4</td><td>aaa</td><td></td></tr>
+    <tr><td>5</td><td>bbb</td><td></td></tr>
+    <tr><td>6</td><td>ccc</td><td></td></tr>
+    </tbody>
+</table>
+<script>
+    var oTab=document.getElementById("tb1");
+
+    var  rows=oTab.tBodies[0].rows;
+
+    var  oTxt=document.getElementById("txt1");
+    var  oBtn=document.getElementById("btn1");
+
+    oBtn.onclick=function(){
+        //1.不区分大小的关键字搜索
+      /*  for(var i=0;i<rows.length;i++){//遍历每一行
+             var   sValueInText=oTxt.value.toLowerCase();
+            var  sValueInRow=rows[i].cells[1].innerHTML.toLowerCase();
+            if(sValueInText==sValueInRow){//只要该行匹配到了就设为黄色
+                rows[i].style.background='yellow';
+            }else{//否则该行就设为""
+                rows[i].style.background="";
+            }*/
+
+         //2.多关键字不区分大小
+        //假设以空格分隔
+        for(var i=0;i<rows.length;i++){
+            var   sValueInText=oTxt.value.toLowerCase();
+            var  arr=sValueInText.split(" ");
+            var bFound=false;
+            var sValueInRows=rows[i].cells[1].innerHTML.toLowerCase();
+            for(var j=0;j<arr.length;j++){
+                if(sValueInRows.search(arr[j]) !=-1){
+                    bFound=true;
+                    break;
+                }
+            }
+            if(bFound){
+                rows[i].style.background='yellow';
+            }else{
+                rows[i].style.background="";
+            }
+
+        }
+
+
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #ul1 {background: red;}
+        #ul2 {background: yellow;}
+    </style>
+</head>
+<body>
+            <input type="button" value="移动li" id="btn1">
+            <input type="button" value="自身追加"  id="btn2">
+            <input type="button" value="升序" id="btn3">
+            <ul id="ul1">
+                <li>88</li>
+                <li>21</li>
+                <li>99</li>
+                <li>111</li>
+                <li>5</li>
+            </ul>
+            <ul id="ul2">
+
+            </ul>
+
+           <input type="button" id="btn4"  value="升序">
+            <table id="tb1" style="border-collapse: collapse;" border="1" width="400">
+                <thead>
+                <tr><th>ID</th><th>姓名</th><th>操作</th></tr>
+                </thead>
+                <tbody>
+                <tr><td>4</td><td>aaa</td><td></td></tr>
+                <tr><td>2</td><td>Leo</td><td></td></tr>
+                <tr><td>6</td><td>ccc</td><td></td></tr>
+                <tr><td>1</td><td>Blue</td><td></td></tr>
+                <tr><td>5</td><td>bbb</td><td></td></tr>
+                <tr><td>3</td><td>莫莫</td><td></td></tr>
+                </tbody>
+            </table>
+            <script>
+                var  oUl1=document.getElementById("ul1");
+                var  oUl2=document.getElementById("ul2");
+                var oBtn=document.getElementById("btn1");
+                var oBtn2=document.getElementById("btn2");
+                var oBtn3=document.getElementById("btn3");
+                var  oBtn4=document.querySelector("#btn4");
+                oBtn.onclick=function(){
+                    oUl2.appendChild(oUl1.children[0]);
+                    //appendChild  先从父级移除再添加到别的父级上
+                };
+
+                oBtn2.onclick=function(){
+                    oUl1.appendChild(oUl1.children[0]);//把第一个从父级移除，再插入到父级的末尾
+                };
+
+                    //默认为升序
+                var  bAsc1=true;
+                oBtn3.onclick=function(){
+                    var  aLi=oUl1.getElementsByTagName("li");
+                    //1.转换成数组
+                    var  arr=[];
+                    for(var i=0;i<aLi.length;i++){
+                        arr.push(aLi[i]);
+                    }
+
+                    //2.排序
+                    arr.sort(function(li1,li2){
+                       if(bAsc1){
+                           return parseInt(li1.innerHTML)-parseInt(li2.innerHTML);
+                       }else{
+                           return parseInt(li2.innerHTML)-parseInt(li1.innerHTML);
+                       }
+                    });
+
+                    //3.重新插入
+                    arr.forEach(function(element){
+                       oUl1.appendChild(element);
+                    });
+                    if(bAsc1){
+                        oBtn3.value="降序";
+                    }else{
+                        oBtn3.value="升序";
+                    }
+
+                    //4
+                    bAsc1=!bAsc1;
+                };
+
+                //默认为升序排序
+                var  bAsc=true;
+                oBtn4.onclick=function(){
+                    var  rows=document.getElementById("tb1").tBodies[0].rows;
+                    var  aResult=[];
+                    //1.转换成数组
+                    for(var i=0;i<rows.length;i++){
+                        aResult.push(rows[i]);
+                    }
+
+                    //2.排序
+                    aResult.sort(function(tr1,tr2){
+                        if(bAsc){
+                            return   parseInt(tr1.cells[0].innerHTML)-parseInt(tr2.cells[0].innerHTML);
+                        }else{//降序
+                            return   parseInt(tr2.cells[0].innerHTML)-parseInt(tr1.cells[0].innerHTML);
+                        }
+                    });
+
+                    //3.重新插入
+                    aResult.forEach(function(element){
+                        document.getElementById("tb1").tBodies[0].appendChild(element);
+                    });
+
+                    //4.改变bAsc
+                    if(bAsc){
+                        oBtn4.value="降序";
+                    }else{
+                        oBtn4.value="升序";
+                    }
+                    bAsc=!bAsc;
+
+
+                }
+
+            </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="txt1"><input type="button" id="btn1"  value="添加">
+<table id="tb1" style="border-collapse: collapse;" border="1" width="400">
+    <thead>
+    <tr><th>ID</th><th>姓名</th><th>操作</th></tr>
+    </thead>
+    <tbody>
+    <tr><td>1</td><td>Blue</td><td></td></tr>
+    <tr><td>2</td><td>Leo</td><td></td></tr>
+    <tr><td>3</td><td>莫莫</td><td></td></tr>
+    <tr><td>4</td><td>aaa</td><td></td></tr>
+    <tr><td>5</td><td>bbb</td><td></td></tr>
+    <tr><td>6</td><td>ccc</td><td></td></tr>
+    </tbody>
+</table>
+<script>
+    var oTab=document.getElementById("tb1");
+    //隔行变色
+    var  rows=oTab.tBodies[0].rows;
+    function changeColor(){
+        for(var i=0;i<rows.length;i++){
+            rows[i].style.background=(i%2)?"#ccc":"";
+        }
+    }
+
+    changeColor();
+    //移入高亮
+    var  originalColor="";
+  function highlight(){
+        for(var i=0;i<rows.length;i++){
+            rows[i].onmouseover=function(){
+                originalColor=this.style.background;
+                this.style.background='yellow';
+            };
+            rows[i].onmouseout=function(){
+                this.style.background=originalColor;
+            }
+        }
+
+    }
+
+    highlight();
+
+    var  oTxt=document.getElementById("txt1");
+    var  oBtn=document.getElementById("btn1");
+    var   iNow=oTab.tBodies[0].rows.length+1;
+
+    oBtn.onclick=function(){
+        var  oTr=document.createElement("tr");
+
+        var  oTd=document.createElement("td");
+        oTd.innerHTML=iNow++;
+        oTr.appendChild(oTd);
+
+        var  oTd=document.createElement("td");
+        oTd.innerHTML=oTxt.value;
+        oTr.appendChild(oTd);
+
+        var  oTd=document.createElement("td");
+        oTd.innerHTML="<a href='javascript:;'>删除</a>";
+        oTr.appendChild(oTd);
+
+        oTd.getElementsByTagName("a")[0].onclick=function(){
+          oTab.tBodies[0].removeChild(this.parentNode.parentNode);
+        };
+
+        oTab.tBodies[0].appendChild(oTr);
+
+      /*  var  aA=oTr.getElementsByTagName("a");
+        for(var i=0;i<aA.length;i++){
+            aA[i].onclick=function(){
+                oTab.tBodies[0].removeChild(this.parentNode.parentNode);
+            }
+        }*/
+
+
+
+
+        changeColor();
+        highlight();
+    }
+
+
+</script>
+</body>
+</html>
