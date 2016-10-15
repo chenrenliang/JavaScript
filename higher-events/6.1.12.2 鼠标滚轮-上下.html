@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+            <script>
+                function  myAddEvent(obj,sEv,fn){
+                    if(obj.addEventListener){
+                        obj.addEventListener(sEv,fn,false);
+                    }else{
+                        obj.attachEvent("on"+sEv,fn);
+                    }
+                }
+                //IE,Chrome   wheelDelta  下  负
+                //FF   detail         下    正
+
+                function  onMouseWheel(ev){
+                    var oEvent=ev || window.event;
+                    var bDown=true;
+                   /* if(oEvent.wheelDelta){//IE,Chrome
+                        if(oEvent.wheelDelta<0){bDown=true;}
+                        else {bDown=false;}
+                    }else{//FF
+                        if(oEvent.detail>0){bDown=true;}
+                        else{bDown=false;}
+                    }*/
+                   bDown=oEvent.wheelDelta?oEvent.wheelDelta<0:oEvent.detail>0;
+
+                    alert(bDown);
+                }
+
+                myAddEvent(document,"mousewheel",onMouseWheel);
+                myAddEvent(document,"DOMMouseScroll",onMouseWheel);
+
+
+
+            </script>
+</body>
+</html>

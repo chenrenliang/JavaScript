@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{width:200px;height:200px;background: red;}
+    </style>
+</head>
+<body style="height:2000px;">
+            <div id="div1"></div>
+            <script>
+                var oDiv=document.getElementById('div1');
+                function onMouseScroll(ev){
+                    var oEvent=ev || window.event;
+                    var bDown=true;
+                    bDown=oEvent.wheelDelta?oEvent.wheelDelta<0:oEvent.detail>0;
+                    if(bDown){
+                        oDiv.style.height=oDiv.offsetHeight+5+"px";
+
+                    }else{
+                        oDiv.style.height=oDiv.offsetHeight-5+"px";
+                    }
+                    if(oEvent.preventDefault){
+                        oEvent.preventDefault();
+                    }
+                    return false;
+                }
+
+              /*  function  preventDefault(ev){
+                    var oEvent=ev || window.event;
+                    if(oEvent.preventDefault){
+                        oEvent.preventDefault();
+                    }else{
+                        return false;
+                    }
+                }*/
+
+                function myAddEvent(obj,sEv,fn){
+                    if(obj.addEventListener){
+                        obj.addEventListener(sEv,fn,false);
+                    }else{
+                        obj.attachEvent("on"+sEv,fn);
+                    }
+                }
+
+                myAddEvent(oDiv,"mousewheel",onMouseScroll);
+                myAddEvent(oDiv,"DOMMouseScroll",onMouseScroll);
+
+
+            </script>
+</body>
+</html>

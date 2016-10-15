@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{width:200px;height:150px;position: relative;background: #ccc;}
+        #div2{width:11px;height:11px;background: url(drag_ico.gif) no-repeat;position: absolute;bottom:0;right:0;cursor: nw-resize;}
+
+    </style>
+</head>
+<body>
+            <div id="div1">
+                    <div id="div2"></div>
+            </div>
+            <script>
+                var oDiv1=document.getElementById("div1");
+                var oDiv2=document.getElementById("div2");
+                oDiv2.onmousedown=function(ev){
+                    var oEvent=ev || window.event;
+                    var disX=oEvent.clientX-oDiv2.offsetLeft;
+                    var disY=oEvent.clientY-oDiv2.offsetTop;
+
+
+                    document.onmousemove=function(ev){
+                        var oEvent=ev || window.event;
+                        oDiv1.style.width=oEvent.clientX-disX+oDiv2.offsetWidth+"px";
+                        oDiv1.style.height=oEvent.clientY-disY+oDiv2.offsetHeight+"px";
+                    };
+                    document.onmouseup=function(){
+                      document.onmousemove=null;
+                        document.onmouseup=null;
+                    }
+                    return false;
+                }
+
+            </script>
+</body>
+</html>

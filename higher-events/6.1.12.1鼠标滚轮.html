@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{width:200px;height:200px;background: red;}
+    </style>
+</head>
+<body>
+        <div id="div1"></div>
+            <script>
+                var oDiv=document.getElementById("div1");
+                //普通事件:onclick, onmousedown
+                //DOM事件:DOMMouseScroll   :只能通过绑定来添加
+
+                //IE,Chrome     onmousewheel
+                //FF                  DOMMouseScroll
+
+                function  onMouseScroll(){
+                    alert('aaaaaa');
+                }
+
+                function  myAddEvent(obj,sEv,fn){
+                    if(obj.addEventListener){
+                        obj.addEventListener(sEv,fn,false);
+                    }else{
+                        obj.attachEvent("on"+sEv,fn);
+                    }
+                }
+
+                myAddEvent(oDiv,'mousewheel',onMouseScroll);//IE Chrome
+                myAddEvent(oDiv,'DOMMouseScroll',onMouseScroll);//FF
+
+
+
+
+
+
+            </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{width:400px;height:20px;background: #ccc;margin:20px auto;position: relative;}
+        #div2{width:20px;height:20px;background: red;position: absolute;cursor: pointer;}
+        #size{width:0;height:0;background: yellow;float:left;display: block;margin-left: 5px;}
+        #opacity{width:200px;height:200px;background: green;opacity: 0;filter:alpha(opacity:0);margin-left: 10px;float:left;}
+
+        #div3{float:left;width:200px;height:400px;background: #ccc;outline:1px solid black;position: relative;overflow: hidden;box-sizing: border-box;margin-left: 5px;}
+        #div4{position: absolute;padding:10px;}
+    </style>
+</head>
+<body>
+            <div id="div1">
+                <div id="div2"></div>
+            </div>
+            <div id="opacity"></div>
+            <div id="div3">
+                <div id="div4">
+                    阴影模糊半径：此参数可选，其值只能是为正值，如果其值为0时，表示阴影不具有模糊效果，其值越大阴影的边缘就越模糊；
+                    阴影扩展半径：此参数可选，其值可以是正负值，如果值为正，则整个阴影都延展扩大，反之值为负值时，则缩小；
+                    box-shadow: X轴偏移量 Y轴偏移量 [阴影模糊半径] [阴影扩展半径] [阴影颜色] [投影方式];
+                    边角部分为裁掉了，可见repeat就是一直重复，然后超出部分剪裁掉，而且是居中开始重复。
+                    Round 参数：Round可以理解为圆满的铺满
+                    Stretch 很好理解就是拉伸，有多长拉多长。有多远“滚”多远
+                    第一个参数省略时，默认为“180deg”，等同于“to bottom”。
+                    第二个和第三个参数，表示颜色的起始点和结束点，可以有多个颜色值。
+                    要实现溢出时产生省略号的效果，还须定义强制文本在一行内显示（white-space:nowrap）及溢出内容为隐藏（overflow:hidden），只有这样才能实现溢出文本显示省略号的效果
+                    text-overflow:ellipsis;
+                    overflow:hidden;
+                    white-space:nowrap;
+                    word-wrap也可以用来设置文本行为，当前行超过指定容器的边界时是否断开转行  长单词或 URL地址
+                    text-shadow: X-Offset Y-Offset blur color;
+                    Blur：是指阴影的模糊程度，其值不能是负值，如果值越大，阴影越模糊，反之阴影越清晰，如果不需要阴影模糊可以将Blur值设置为0；
+                    所在元素宽高
+                    左右外边距用px,上下用em
+                    控制元素的宽度
+                    浮动非图片元素时，必须给它设定宽度
+                    width:100%  clear:left
+                </div>
+            </div>
+            <div id="size"></div>
+            <script>
+                var oDiv1=document.getElementById("div1");
+                var oDiv2=document.getElementById("div2");
+                var oDiv3=document.getElementById("div3");
+                var oDiv4=document.getElementById("div4");
+                var oSize=document.getElementById("size");
+                var oOpacity=document.getElementById("opacity");
+                oDiv2.onmousedown=function(ev){
+                    var oEvent=ev || window.event;
+                    var disX=oEvent.clientX-oDiv2.offsetLeft;
+
+                    document.onmousemove=function(ev){
+                        var oEvent=ev || window.event;
+                        var l=oEvent.clientX-disX;
+                        if(l<0){l=0;}
+                        else if(l>oDiv1.offsetWidth-oDiv2.offsetWidth){
+                            l=oDiv1.offsetWidth-oDiv2.offsetWidth;
+                        }
+//                        var scale=l/(oDiv1.offsetWidth-oDiv2.offsetWidth).toFixed(2);
+                        var scale=l/(oDiv1.offsetWidth-oDiv2.offsetWidth);
+                        document.title=scale;
+                        oSize.style.width=200*scale+"px";
+                        oSize.style.height=200*scale+"px";
+                        oOpacity.style.filter=scale*100;
+                        oOpacity.style.opacity=scale;
+                        oDiv4.style.top=-(oDiv4.offsetHeight-oDiv3.offsetHeight)*scale+"px";
+                        //oDiv3.offsetHeight是一个固定值400px
+                        //而oDiv3.offsetHeight也是一个固定值：就是存放文字的高度
+                        //可滚动的距离为div3的高度-div4的高度
+                        oDiv2.style.left=l+"px";
+                    };
+                    document.onmouseup=function(){
+                        document.onmousemove=null;
+                        document.onmouseup=null;
+                    };
+                    return false;
+                };
+
+                //阻止默认事件 IE:return false  document.ontextmenu=function(){return false;}
+                //其他   ev.preventDefault()   document.addEventListener("contextmenu",function(ev){},false)
+
+
+            </script>
+</body>
+</html>

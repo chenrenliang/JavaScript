@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{width:100px;height:100px;background: yellow;position: absolute;}
+        .box{border:1px dashed black;position: absolute;}
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+
+<script>
+    var oDiv1=document.getElementById("div1");
+
+    oDiv1.onmousedown=function(ev){
+        var oEvent=ev || window.event;
+        var disX=oEvent.clientX-oDiv1.offsetLeft;
+        var disY=oEvent.clientY-oDiv1.offsetTop;
+
+        var  oDiv2=document.createElement("div");
+        oDiv2.className="box";
+        oDiv2.style.width=oDiv1.offsetWidth-2+"px";
+        oDiv2.style.height=oDiv1.offsetHeight-2+"px";
+        oDiv2.style.left=oDiv1.offsetLeft+"px";
+        oDiv2.style.top=oDiv1.offsetTop+"px";
+        document.body.appendChild(oDiv2);
+
+        document.onmousemove=function(ev){
+            var oEvent=ev || window.event;
+
+            oDiv2.style.left=oEvent.clientX-disX+"px";
+            oDiv2.style.top=oEvent.clientY-disY+"px";
+
+
+        };
+
+        document.onmouseup=function(){
+            document.onmousemove=null;
+            document.onmouseup=null;
+//            oDiv1.style.left=oDiv2.offsetLeft+"px";
+//            oDiv1.style.top=oDiv2.offsetTop+"px";
+            oDiv1.style.left=oDiv2.style.left;
+            oDiv1.style.top=oDiv2.style.top;
+            document.body.removeChild(oDiv2);
+
+        };
+        return false;
+    }
+</script>
+</body>
+</html>
