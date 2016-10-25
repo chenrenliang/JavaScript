@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="tool.js"></script>
+</head>
+<body>
+            <a href="javascript:popUp('http://www.zhihu.com/');">Example</a>
+            <a href="http://www.zhihu.com/" onclick="popUp('htttp://www.zhihu.com/'); return false;">Example</a>
+            <a href="http://www.zhihu.com/" onclick="popUp(this.getAttribute('href')); return false;">Example</a>
+            <div id="testdiv">
+                <p>This is <em>my</em> content.</p>
+            </div>
+  <!--          <script>
+                document.write("<p>This is inserted.</p>");
+                insertParagraph("This is a test");
+                var  para=document.createElement("p");
+                var info="nodName:";
+                info+=para.nodeName;
+                info+=" nodeType:";
+                info+=para.nodeType;
+                console.log(info);
+
+                var  testdiv=document.getElementById("testdiv");
+                var txt=document.createTextNode("Hello World!");
+                para.appendChild(txt);
+                testdiv.appendChild(para);
+
+            </script>-->
+
+          <!--  <script>
+                var para=document.createElement("p");
+                var txt1=document.createTextNode("This is ");
+                para.appendChild(txt1);
+
+                var  emphasis=document.createElement("em");
+                var txt2=document.createTextNode("my");
+                emphasis.appendChild(txt2);
+                para.appendChild(emphasis);
+
+                var txt3=document.createTextNode(" content.");
+                para.appendChild(txt3);
+
+                var testdiv=document.getElementById("testdiv");
+                testdiv.appendChild(para);
+            </script>-->
+
+            <script>
+                var testdiv=document.getElementById("testdiv");
+                var para=document.createElement("p");
+                var txt1=document.createTextNode("This is ");
+                var emphasis=document.createElement("em");
+                var txt2=document.createTextNode("my");
+                var txt3=document.createTextNode(" content.");
+                para.appendChild(txt1);
+                emphasis.appendChild(txt2);
+                para.appendChild(emphasis);
+                para.appendChild(txt3);
+
+                testdiv.appendChild(para);
+
+
+            </script>
+
+            <dl>
+                <dt>
+                    <dd></dd>
+                    <dd></dd>
+                    <dd></dd>
+                </dt>
+            </dl>
+</body>
+</html>
