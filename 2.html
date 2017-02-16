@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <script>
+            var name='Nicholas';
+            var lowercaseName=name.toLowerCase();//'nicholas'
+            var firstLetter=name.charAt(0);//'N'
+            var middleOfName=name.substring(2,5);//[2,5)->cho
+
+            var count=10;
+            var fixedCount=count.toFixed(2);//两位小数点 10.00
+            var hexCount=count.toString(16);//'a'
+
+            var flag=true;
+            var stringFlag=flag.toString();//'true'
+
+            console.log(lowercaseName);
+            console.log(firstLetter);
+            console.log(middleOfName);
+            console.log(fixedCount);
+            console.log(hexCount);
+            console.log(stringFlag);
+
+            var obj1=new Object();
+            var obj2=obj1;
+            var obj1=null;
+            console.log(obj2);//object
+            console.log(obj1);//null
+            
+
+
+
+
+
+        </script>
+</body>
+</html>
